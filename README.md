@@ -1,4 +1,4 @@
-#Frogger#
+# Frogger
 
 ## Playing this game
 In order to play this game you just need to download this repository and open index.html in the main directory.
