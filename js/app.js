@@ -13,11 +13,16 @@ var Enemy = function(x, y, speed) {
 
 // Update the enemy's position, required method for game
 Enemy.prototype.update = function(dt) {
+    // Update the bug speed and check if the bug have hit the end of the canvas x axis, if so reset the bug to the start of x
     this.x += this.speed * dt;
     if (this.x >= 505) {
         this.x = 0;
     }
-    checkCollision(this);
+    // Check if the player collided with an enemy, if so reset the player position
+    if (player.y + 130 >= this.y + 90 && player.x + 25 <= this.x + 70 && player.y + 70 <= this.y + 135 && player.x + 75 >= this.x + 10) {
+        player.x = 200;
+        player.y = 370;
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -40,52 +45,43 @@ Player.prototype.render = function() {
 
 // Handle the key presses
 Player.prototype.handleInput = function(keyPress) {
+    // Switch between key presses
     switch(keyPress) {
       case 'up':
-        player.y -= player.speed + 33;
-        break
+        this.y -= player.speed + 33;
+        break;
       case 'down':
-        player.y += player.speed + 33;
-        break
+        this.y += player.speed + 33;
+        break;
       case 'left':
-        player.x -= player.speed;
-        break
+        this.x -= player.speed;
+        break;
       case 'right':
-        player.x += player.speed;
-        break
+        this.x += player.speed;
+        break;
     }
-};
-
-Player.prototype.update = function() {
-}
-
-var checkCollision = function(enemyUnit) {
-    // Check if the player and enemies collided if so reset the player position
-    if (player.y + 130 >= enemyUnit.y + 90 && player.x + 25 <= enemyUnit.x + 70 && player.y + 70 <= enemyUnit.y + 135 && player.x + 75 >= enemyUnit.x + 10) {
-        player.x = 200;
-        player.y = 370;
+    // Check if the player is in the boundaries of the canvas
+    if (this.y > 400) {
+        this.y = 400;
     }
-
-    // Check if the player reach the top and if it true add a new enemy
-    if (player.y + 50 <= 0) {
-        player.x = 200;
-        player.y = 370;
+    if (this.x > 400) {
+        this.x = 400;
+    }
+    if (this.x < 0) {
+        this.x = 0;
+    }
+    // Check if the player reach the top and if its true add a new enemy
+    if (this.y + 50 <= 0) {
+        this.x = 200;
+        this.y = 370;
         ctx.fillStyle = 'white';
         ctx.fillRect(0, 0, 505, 171);
         var enemy = new Enemy(0, getRandomInt(40, 210), Math.random() * 256);
         allEnemies.push(enemy);
     }
+};
 
-    // Keep the player into the canvas boundaries
-    if (player.y > 400) {
-        player.y = 400;
-    }
-    if (player.x > 400) {
-        player.x = 400;
-    }
-    if (player.x < 0) {
-        player.x = 0;
-    }
+Player.prototype.update = function() {
 };
 
 // Now instantiate your objects.
