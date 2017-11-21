@@ -48,16 +48,16 @@ Player.prototype.handleInput = function(keyPress) {
     // Switch between key presses
     switch(keyPress) {
       case 'up':
-        this.y -= player.speed + 33;
+        this.y -= this.speed + 33;
         break;
       case 'down':
-        this.y += player.speed + 33;
+        this.y += this.speed + 33;
         break;
       case 'left':
-        this.x -= player.speed;
+        this.x -= this.speed + 50;
         break;
       case 'right':
-        this.x += player.speed;
+        this.x += this.speed + 50;
         break;
     }
     // Check if the player is in the boundaries of the canvas
