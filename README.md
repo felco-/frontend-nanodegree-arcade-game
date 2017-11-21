@@ -7,4 +7,4 @@ In order to play this game you just need to download this repository and open in
 You can move Up, Down, Left and Right(Using the arrow keys).
 
 ## Goal
-Cross the map without hitting any bugs, every time you hit the water a new bug spawn and the game get harder!
+Cross the map without hitting any bugs, every time you hit the water a new bug spawn and the game gets harder!
